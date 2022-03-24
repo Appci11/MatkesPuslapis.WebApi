@@ -17,7 +17,6 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             _userServices = userServices;
         }
-
         [HttpGet]
         public IActionResult GetUsers()
         {
@@ -45,6 +44,12 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_userServices.UpdateUser(user));
         }
-
+        [HttpPost]
+        [Route("register")]
+        public IActionResult AddUser2(string username, string email, string password)
+        {
+            _userServices.AddUser2(username, email, password);
+            return Ok();
+        }
     }
 }

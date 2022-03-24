@@ -13,5 +13,6 @@ namespace MatkesPuslapis.Core
         User AddUser(User user);
         void DeleteUser(string id);
         User UpdateUser(User user);
+        User AddUser2(string username, string email, string password);
     }
 }

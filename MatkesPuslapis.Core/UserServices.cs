@@ -18,6 +18,16 @@ namespace MatkesPuslapis.Core
             return user;
         }
 
+        public User AddUser2(string username, string email, string password)
+        {
+            User user = new User();
+            user.Name = username;
+            user.EMail = email;
+            user.Password = password;
+            _users.InsertOne(user);
+            return user;
+        }
+
         public void DeleteUser(string id)
         {
             _users.DeleteOne(user => user.Id == id);
