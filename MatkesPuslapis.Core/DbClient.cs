@@ -11,12 +11,15 @@ namespace MatkesPuslapis.Core
     public class DbClient : IDbClient
     {
         private readonly IMongoCollection<User> _users;
+        private readonly IMongoCollection<Test> _tests;
         public DbClient(IOptions<MatkesPuslapisDbConfig> matkesPuslapisDbConfig)
         {
             var client = new MongoClient(matkesPuslapisDbConfig.Value.Connection_String);
             var database = client.GetDatabase(matkesPuslapisDbConfig.Value.Database_Name);
             _users = database.GetCollection<User>(matkesPuslapisDbConfig.Value.Users_Collection_Name);
+            _tests = database.GetCollection<Test>(matkesPuslapisDbConfig.Value.Tests_Collection_Name);
         }
         public IMongoCollection<User> GetUsersCollection() => _users;
+        public IMongoCollection<Test> GetTestsCollection() => _tests;
     }
 }

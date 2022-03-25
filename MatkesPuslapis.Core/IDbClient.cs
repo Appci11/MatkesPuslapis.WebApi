@@ -10,5 +10,6 @@ namespace MatkesPuslapis.Core
     public interface IDbClient
     {
         IMongoCollection<User> GetUsersCollection();
+        IMongoCollection<Test> GetTestsCollection();
     }
 }

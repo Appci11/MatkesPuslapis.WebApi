@@ -45,7 +45,7 @@ namespace MatkesPuslapis.WebApi.Controllers
             return Ok(_userServices.UpdateUser(user));
         }
         [HttpPost]
-        [Route("register")]
+        [Route("register{username}/{email}/{password}")]
         public IActionResult AddUser2(string username, string email, string password)
         {
             _userServices.AddUser2(username, email, password);

@@ -16,7 +16,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_NAME": "MatkesPuslapisDb",
-        "USERS_COLLECTION_NAME": "Users"
+        "USERS_COLLECTION_NAME": "Users",
+        "TESTS_COLLECTION_NAME": "Tests"
       }
     },
     "MatkesPuslapis.WebApi": {
@@ -28,7 +29,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_NAME": "MatkesPuslapisDb",
-        "USERS_COLLECTION_NAME": "Users"
+        "USERS_COLLECTION_NAME": "Users",
+        "TESTS_COLLECTION_NAME": "Tests"
       }
     }
   }
