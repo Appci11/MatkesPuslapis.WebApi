@@ -25,7 +25,14 @@ namespace MatkesPuslapis.WebApi.Controllers
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult GetUser(string id)
         {
-            return Ok(_userServices.GetUser(id));
+            try
+            {
+                return Ok(_userServices.GetUser(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPost]
         public IActionResult AddUser(User user)
@@ -36,20 +43,43 @@ namespace MatkesPuslapis.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(string id)
         {
-            _userServices.DeleteUser(id);
-            return NoContent();
+            try
+            {
+                _userServices.DeleteUser(id);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPut]
         public IActionResult UpdateUser(User user)
         {
-            return Ok(_userServices.UpdateUser(user));
+            try
+            {
+                return Ok(_userServices.UpdateUser(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        /// <summary>
+        /// Prideda "User" irasa i "Users" lentele duomenu bazeje
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns>0 - irasyta sekmingai; 1 - username egzistuoja; 2 - email egzistuoja</returns>
         [HttpPost]
         [Route("register{username}/{email}/{password}")]
-        public IActionResult AddUser2(string username, string email, string password)
+        public IActionResult AddUser(string username, string email, string password)
         {
-            _userServices.AddUser2(username, email, password);
-            return Ok();
+            if (_userServices.UsernameExists(username)) { return Ok(1); }
+            if (_userServices.EmailExists(email)) { return Ok(2); }
+            _userServices.AddUser(username, email, password);
+            return Ok(0);
         }
     }
 }

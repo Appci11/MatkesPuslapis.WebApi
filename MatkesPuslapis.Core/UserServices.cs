@@ -11,14 +11,24 @@ namespace MatkesPuslapis.Core
         {
             _users = dbClient.GetUsersCollection();
         }
-
+        /// <summary>
+        /// Prideda "User" objekto irasa i "Users" lentele duomenu bazeje
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public User AddUser(User user)
         {
             _users.InsertOne(user);
             return user;
         }
-
-        public User AddUser2(string username, string email, string password)
+        /// <summary>
+        /// Prideda "User" objekto irasa i "Users" lentele duomenu bazeje
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public User AddUser(string username, string email, string password)
         {
             User user = new User();
             user.Name = username;
@@ -57,6 +67,32 @@ namespace MatkesPuslapis.Core
             return user;
         }
 
+        public bool UsernameExists(string username)
+        {
+            bool exists = true;
+            try
+            {
+                _users.Find(user => user.Name == username).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
 
+        public bool EmailExists(string email)
+        {
+            bool exists = true;
+            try
+            {
+                _users.Find(user => user.EMail == email).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
     }
 }
