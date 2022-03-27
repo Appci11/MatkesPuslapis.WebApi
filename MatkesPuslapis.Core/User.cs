@@ -11,6 +11,5 @@ namespace MatkesPuslapis.Core
         public string EMail { get; set; }
         public string Password { get; set; }
         public int Role { get; set; }
-
     }
 }

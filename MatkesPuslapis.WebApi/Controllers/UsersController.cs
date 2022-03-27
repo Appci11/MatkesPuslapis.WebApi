@@ -73,13 +73,18 @@ namespace MatkesPuslapis.WebApi.Controllers
         /// <param name="password"></param>
         /// <returns>0 - irasyta sekmingai; 1 - username egzistuoja; 2 - email egzistuoja</returns>
         [HttpPost]
-        [Route("register{username}/{email}/{password}")]
-        public IActionResult AddUser(string username, string email, string password)
+        [Route("register")]
+        public IActionResult AddUser(string name, string email, string password)
         {
-            if (_userServices.UsernameExists(username)) { return Ok(1); }
+            if (_userServices.UsernameExists(name)) { return Ok(1); }
             if (_userServices.EmailExists(email)) { return Ok(2); }
-            _userServices.AddUser(username, email, password);
+            _userServices.AddUser(name, email, password);
             return Ok(0);
+        }
+        [HttpGet("Tikrinti")]
+        public IActionResult Test()
+        {
+            return Ok(_userServices.Test());
         }
     }
 }

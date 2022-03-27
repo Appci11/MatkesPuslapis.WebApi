@@ -1,6 +1,4 @@
-﻿//Bet ko bandymams/testavimui. Uzbaigtai programai nereikalinga
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MatkesPuslapis.Core
 {
-    public interface ITestServices
+    public class UserCredentials
     {
-        List<User> GetTests();
+        public string EMail { get; set; }
+        public string Password { get; set; }
     }
 }

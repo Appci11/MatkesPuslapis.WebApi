@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿//Bet ko bandymams/testavimui. Uzbaigtai programai nereikalinga
+
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace MatkesPuslapis.Core
 {

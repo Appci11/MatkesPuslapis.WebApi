@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 
@@ -93,6 +94,18 @@ namespace MatkesPuslapis.Core
                 exists = false;
             }
             return exists;
+        }
+        public string Test()
+        {
+            try
+            {
+                _users.Find(user => user.EMail == "aaa" && user.Password == "aaa").First();
+            }
+            catch (Exception ex)
+            {
+                return "Nera";
+            }
+            return "Yra";
         }
     }
 }

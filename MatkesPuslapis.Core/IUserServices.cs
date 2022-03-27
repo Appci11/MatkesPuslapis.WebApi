@@ -16,5 +16,6 @@ namespace MatkesPuslapis.Core
         User AddUser(string username, string email, string password);
         bool UsernameExists(string username);
         bool EmailExists(string email);
+        string Test();
     }
 }

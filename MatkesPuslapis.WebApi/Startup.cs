@@ -1,4 +1,5 @@
 using MatkesPuslapis.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MatkesPuslapis.WebApi
 {
@@ -30,6 +33,28 @@ namespace MatkesPuslapis.WebApi
             services.Configure<MatkesPuslapisDbConfig>(Configuration);
 
             services.AddSingleton<IDbClient, DbClient>();
+
+            var key = "Super secret and complex key";
+            services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            
+            
             services.AddTransient<ITestServices, TestServices>();
             services.AddTransient<IUserServices, UserServices>();
 
@@ -54,6 +79,7 @@ namespace MatkesPuslapis.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
