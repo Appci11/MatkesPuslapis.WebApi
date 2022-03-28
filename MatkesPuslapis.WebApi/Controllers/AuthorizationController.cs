@@ -7,8 +7,7 @@ using System.Collections.Generic;
 
 namespace MatkesPuslapis.WebApi.Controllers
 {
-    [Authorize]
-    [Route("[controller]")]
+    [Route("auth")]
     [ApiController]
     public class AuthorizationController : ControllerBase
     {
@@ -18,8 +17,17 @@ namespace MatkesPuslapis.WebApi.Controllers
             this.jwtAuthenticationManager = jwtAuthenticationManager;
         }
 
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost]
+        [Route("register")]
+        public IActionResult AddUser(string name, string email, string password)
+        {
+            if (jwtAuthenticationManager.UsernameExists(name)) { return Ok(1); }
+            if (jwtAuthenticationManager.EmailExists(email)) { return Ok(2); }
+            jwtAuthenticationManager.AddUser(name, email, password);
+            return Ok(0);
+        }
+
+        [HttpPost("login")]
         public IActionResult Authenticate(string email, string password)
         {
             var token = jwtAuthenticationManager.Authenticate(email, password);

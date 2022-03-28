@@ -66,13 +66,7 @@ namespace MatkesPuslapis.WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        /// <summary>
-        /// Prideda "User" irasa i "Users" lentele duomenu bazeje
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        /// <returns>0 - irasyta sekmingai; 1 - username egzistuoja; 2 - email egzistuoja</returns>
+
         [HttpPost]
         [Route("register")]
         public IActionResult AddUser(string name, string email, string password)
@@ -82,6 +76,7 @@ namespace MatkesPuslapis.WebApi.Controllers
             _userServices.AddUser(name, email, password);
             return Ok(0);
         }
+
         [Authorize]
         [HttpGet("Test")]
         public IActionResult Test()

@@ -52,5 +52,43 @@ namespace MatkesPuslapis.Core
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        public User AddUser(string username, string email, string password)
+        {
+            User user = new User();
+            user.Name = username;
+            user.EMail = email;
+            user.Password = password;
+            _users.InsertOne(user);
+            return user;
+        }
+
+        public bool UsernameExists(string username)
+        {
+            bool exists = true;
+            try
+            {
+                _users.Find(user => user.Name == username).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
+
+        public bool EmailExists(string email)
+        {
+            bool exists = true;
+            try
+            {
+                _users.Find(user => user.EMail == email).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
     }
 }
