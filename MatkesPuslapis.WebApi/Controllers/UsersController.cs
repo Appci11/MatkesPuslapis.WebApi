@@ -1,4 +1,5 @@
 ﻿using MatkesPuslapis.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,7 +23,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_userServices.GetUsers());
         }
-        [HttpGet("{id}", Name = "GetUser")]
+        [HttpGet("/{id}", Name = "GetUser")]
         public IActionResult GetUser(string id)
         {
             try
@@ -81,10 +82,11 @@ namespace MatkesPuslapis.WebApi.Controllers
             _userServices.AddUser(name, email, password);
             return Ok(0);
         }
-        [HttpGet("Tikrinti")]
+        [Authorize]
+        [HttpGet("Test")]
         public IActionResult Test()
         {
-            return Ok(_userServices.Test());
+            return Ok("Pro autorizacija praeita sekmingai");
         }
     }
 }
