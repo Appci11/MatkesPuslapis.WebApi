@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace MatkesPuslapis.Core
 {
-    public class UserCredentials
+    public class UserRegisterCredentials
     {
-        public string EMail { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }
