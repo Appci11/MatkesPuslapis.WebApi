@@ -21,6 +21,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             _testServices = testServices;
         }
+        [Authorize]
         [HttpGet]
         public IActionResult GetTests()
         {
