@@ -21,10 +21,13 @@ namespace MatkesPuslapis.WebApi.Controllers
         [Route("register")]
         public IActionResult AddUser(string name, string email, string password)
         {
-            if (jwtAuthenticationManager.UsernameExists(name)) { return Ok(1); }
-            if (jwtAuthenticationManager.EmailExists(email)) { return Ok(2); }
+            bool a = jwtAuthenticationManager.UsernameExists(name);
+            bool b = jwtAuthenticationManager.EmailExists(email);
+            if(a && b) return StatusCode(406, new { Name = "Already exists", Email = "Already exists" });
+            if (a) return StatusCode(406, new { Name = "Already exists"});
+            if (b) return StatusCode(406, new { Email = "Already exists" });
             jwtAuthenticationManager.AddUser(name, email, password);
-            return Ok(0);
+            return Ok("Registered");
         }
 
         [HttpPost("login")]
