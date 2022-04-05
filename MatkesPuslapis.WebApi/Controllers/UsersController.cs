@@ -23,7 +23,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_userServices.GetUsers());
         }
-        [HttpGet("/{id}", Name = "GetUser")]
+        [HttpGet("{id}", Name = "GetUser")]
         public IActionResult GetUser(string id)
         {
             try
