@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MatkesPuslapis.Core
 {
-    internal class QuestionServices : IQuestionServices
+    public class QuestionServices : IQuestionServices
     {
         private readonly IMongoCollection<Question> _questions;
         public QuestionServices(IDbClient dbClient)

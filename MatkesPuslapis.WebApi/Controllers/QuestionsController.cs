@@ -21,6 +21,13 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             _questionServices = questionServices;
         }
+        [HttpPost]
+        public IActionResult AddQuestion(Question question)
+        {
+            _questionServices.AddQuestion(question);
+            return CreatedAtRoute("GetQuestion", new { id = question.Id }, question);
+        }
+
         [HttpGet]
         public IActionResult GetQuestions()
         {

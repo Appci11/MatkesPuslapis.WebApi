@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MatkesPuslapis.Core.Interfaces;
 
 namespace MatkesPuslapis.WebApi
 {
@@ -69,10 +70,11 @@ namespace MatkesPuslapis.WebApi
                     
                 };
             });
-            
-            
-            services.AddTransient<ITestServices, TestServices>();
+
             services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<ITestServices, TestServices>();
+            services.AddTransient<IQuestionServices, QuestionServices>();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
