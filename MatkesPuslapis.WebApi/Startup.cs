@@ -92,7 +92,7 @@ namespace MatkesPuslapis.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
 
             //cors
             app.UseCors(myPolicy);
