@@ -11,5 +11,6 @@ namespace MatkesPuslapis.Core
     {
         IMongoCollection<User> GetUsersCollection();
         IMongoCollection<Test> GetTestsCollection();
+        IMongoCollection<Question> GetQuestionsCollection();
     }
 }

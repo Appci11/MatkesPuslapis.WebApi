@@ -1,5 +1,6 @@
 ﻿using MatkesPuslapis.Core;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -11,6 +12,7 @@ using System.Net.Http;
 
 namespace MatkesPuslapis.WebApi.Controllers
 {
+    [EnableCors]
     [Route("auth")]
     [ApiController]
     public class AuthorizationController : ControllerBase
@@ -58,8 +60,8 @@ namespace MatkesPuslapis.WebApi.Controllers
             cookieOptions.HttpOnly = true;
             cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
             this.HttpContext.Response.Cookies.Append("Session", token, cookieOptions);
-            return Ok();
-            //return Ok(token);
+            //return Ok();
+            return Ok(token);
         }
     }
 }

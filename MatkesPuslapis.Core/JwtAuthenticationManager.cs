@@ -43,7 +43,7 @@ namespace MatkesPuslapis.Core
                 {
                     new Claim(ClaimTypes.Name, email)
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddSeconds(20),
                 SigningCredentials =
                 new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),

@@ -12,23 +12,13 @@ namespace MatkesPuslapis.Core
         {
             _users = dbClient.GetUsersCollection();
         }
-        /// <summary>
-        /// Prideda "User" objekto irasa i "Users" lentele duomenu bazeje
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
+
         public User AddUser(User user)
         {
             _users.InsertOne(user);
             return user;
         }
-        /// <summary>
-        /// Prideda "User" objekto irasa i "Users" lentele duomenu bazeje
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
+
         public User AddUser(string username, string email, string password)
         {
             User user = new User();

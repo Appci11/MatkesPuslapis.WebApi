@@ -17,7 +17,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_NAME": "MatkesPuslapisDb",
         "USERS_COLLECTION_NAME": "Users",
-        "TESTS_COLLECTION_NAME": "Tests"
+        "TESTS_COLLECTION_NAME": "Tests",
+        "QUESTIONS_COLLECTION_NAME": "Questions"
       }
     },
     "MatkesPuslapis.WebApi": {
@@ -30,7 +31,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DATABASE_NAME": "MatkesPuslapisDb",
         "USERS_COLLECTION_NAME": "Users",
-        "TESTS_COLLECTION_NAME": "Tests"
+        "TESTS_COLLECTION_NAME": "Tests",
+        "QUESTIONS_COLLECTION_NAME": "Questions"
       }
     }
   }

@@ -2,6 +2,7 @@
 
 using MatkesPuslapis.Core;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MatkesPuslapis.WebApi.Controllers
 {
-
+    [EnableCors]
     [ApiController]
     [Route("[controller]")]
     public class TestsController : ControllerBase

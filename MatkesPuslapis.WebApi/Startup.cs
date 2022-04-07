@@ -34,15 +34,15 @@ namespace MatkesPuslapis.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             //cors
-            services.AddCors(o => o.AddPolicy(myPolicy, builder =>
-            {
-                //builder.WithOrigins("http://example.com")
-                //       .AllowAnyMethod()
-                //       .AllowAnyHeader();
-                builder.WithOrigins("*", "https://localhost:*")    //kol neaisku is ko, bandom su *
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+            //services.AddCors(o => o.AddPolicy(myPolicy, builder =>
+            //{
+            //    //builder.WithOrigins("http://example.com")
+            //    //       .AllowAnyMethod()
+            //    //       .AllowAnyHeader();
+            //    builder.WithOrigins("*", "https://localhost:*")    //kol neaisku is ko, bandom su *
+            //           .AllowAnyMethod()
+            //           .AllowAnyHeader();
+            //}));
 
             services.Configure<MatkesPuslapisDbConfig>(Configuration);
 
@@ -64,7 +64,9 @@ namespace MatkesPuslapis.WebApi
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    
                 };
             });
             
@@ -95,7 +97,11 @@ namespace MatkesPuslapis.WebApi
             //app.UseCookiePolicy();
 
             //cors
-            app.UseCors(myPolicy);
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
             app.UseAuthorization();
