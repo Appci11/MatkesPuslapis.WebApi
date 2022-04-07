@@ -54,13 +54,12 @@ namespace MatkesPuslapis.WebApi.Controllers
             if (token == null)
                 return Unauthorized();
 
-            //CookieOptions cookieOptions = new CookieOptions();
-            //cookieOptions.HttpOnly = true;
-            //cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
-            //this.HttpContext.Response.Cookies.Append("Session", token, cookieOptions);
-
-            return Ok(token);
-
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.HttpOnly = true;
+            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
+            this.HttpContext.Response.Cookies.Append("Session", token, cookieOptions);
+            return Ok();
+            //return Ok(token);
         }
     }
 }

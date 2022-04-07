@@ -20,6 +20,9 @@ namespace MatkesPuslapis.WebApi
 {
     public class Startup
     {
+        //cors
+        readonly string myPolicy = "MyPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +33,17 @@ namespace MatkesPuslapis.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //cors
+            services.AddCors(o => o.AddPolicy(myPolicy, builder =>
+            {
+                //builder.WithOrigins("http://example.com")
+                //       .AllowAnyMethod()
+                //       .AllowAnyHeader();
+                builder.WithOrigins("*", "https://localhost:*")    //kol neaisku is ko, bandom su *
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.Configure<MatkesPuslapisDbConfig>(Configuration);
 
             services.AddSingleton<IDbClient, DbClient>();
@@ -78,6 +92,10 @@ namespace MatkesPuslapis.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCookiePolicy();
+
+            //cors
+            app.UseCors(myPolicy);
 
             app.UseAuthentication();
             app.UseAuthorization();

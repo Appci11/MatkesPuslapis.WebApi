@@ -8,12 +8,19 @@ namespace MatkesPuslapis.Core
 {
     public class TestServices : ITestServices
     {
-        private readonly IMongoCollection<User> _tests;
+        private readonly IMongoCollection<Test> _tests;
         public TestServices(IDbClient dbClient)
         {
-            _tests = dbClient.GetUsersCollection();
+            _tests = dbClient.GetTestsCollection();
         }
 
-        public List<User> GetTests() => _tests.Find(test => true).ToList();
+        public Test AddTest(Test test)
+        {
+            _tests.InsertOne(test);
+            return test;
+        }
+
+        public List<Test> GetTests() => _tests.Find(test => true).ToList();
+
     }
 }

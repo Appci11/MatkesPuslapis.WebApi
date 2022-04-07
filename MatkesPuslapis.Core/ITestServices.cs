@@ -10,6 +10,7 @@ namespace MatkesPuslapis.Core
 {
     public interface ITestServices
     {
-        List<User> GetTests();
+        List<Test> GetTests();
+        Test AddTest(Test test);
     }
 }

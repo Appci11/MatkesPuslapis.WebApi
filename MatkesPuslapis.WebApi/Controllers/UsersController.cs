@@ -23,6 +23,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_userServices.GetUsers());
         }
+        [Authorize]
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult GetUser(string id)
         {

@@ -21,11 +21,17 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             _testServices = testServices;
         }
-        [Authorize]
         [HttpGet]
-        public IActionResult GetTests()
+        public IActionResult GetUsers()
         {
             return Ok(_testServices.GetTests());
+        }
+
+        [HttpPost]
+        public IActionResult AddTest(Test test)
+        {
+            _testServices.AddTest(test);
+            return CreatedAtRoute("GetTest", new { id = test.Id }, test);
         }
     }
 }
