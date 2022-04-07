@@ -17,27 +17,24 @@ namespace MatkesPuslapis.Core
         }
         public Question AddQuestion(Question question)
         {
-            throw new NotImplementedException();
+            _questions.InsertOne(question);
+            return question;
         }
 
         public void DeleteQuestion(string id)
         {
-            throw new NotImplementedException();
+            _questions.DeleteOne(question => question.Id == id);
         }
 
-        public Question GetQuestion(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public Question GetQuestion(string id) => _questions.Find(question => question.Id == id).First();
 
-        public List<Question> GetQuestions()
-        {
-            throw new NotImplementedException();
-        }
+        public List<Question> GetQuestions() => _questions.Find(question => true).ToList();
 
         public Question UpdateQuestion(Question question)
         {
-            throw new NotImplementedException();
+            GetQuestion(question.Id);
+            _questions.ReplaceOne(q => q.Id == question.Id, question);
+            return question;
         }
 
         public bool QuestionExists(string questionText)
