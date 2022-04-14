@@ -13,6 +13,6 @@ namespace MatkesPuslapis.Core.Interfaces
         Question AddQuestion(Question question);
         void DeleteQuestion(string id);
         Question UpdateQuestion(Question question);
-        bool QuestionExists(string questionText);
+        bool NameExists(string name);
     }
 }

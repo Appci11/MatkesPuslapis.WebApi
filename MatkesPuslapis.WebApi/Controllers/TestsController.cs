@@ -22,17 +22,62 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             _testServices = testServices;
         }
-        [HttpGet]
-        public IActionResult GetUsers()
-        {
-            return Ok(_testServices.GetTests());
-        }
 
         [HttpPost]
         public IActionResult AddTest(Test test)
         {
+            if (_testServices.NameExists(test.Name))
+                return StatusCode(406, new { Name = "Already exists" });
             _testServices.AddTest(test);
             return CreatedAtRoute("GetTest", new { id = test.Id }, test);
+        }
+
+        [HttpGet]
+        public IActionResult GetTests()
+        {
+            return Ok(_testServices.GetTests());
+        }
+
+        [HttpGet("{id}", Name = "GetTest")]
+        public IActionResult GetTest(string id)
+        {
+            try
+            {
+                return Ok(_testServices.GetTest(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateTest(Test test)
+        {
+            if (_testServices.NameExists(test.Name))
+                return StatusCode(406, new { Name = "Already exists" });
+            try
+            {
+                return Ok(_testServices.UpdateTest(test));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTest(string id)
+        {
+            try
+            {
+                _testServices.DeleteTest(id);
+                return Ok("Deletion Successful");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

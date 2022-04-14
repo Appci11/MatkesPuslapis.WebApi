@@ -12,5 +12,9 @@ namespace MatkesPuslapis.Core
     {
         List<Test> GetTests();
         Test AddTest(Test test);
+        Test GetTest(string id);
+        void DeleteTest(string id);
+        Test UpdateTest(Test test);
+        bool NameExists(string name);
     }
 }

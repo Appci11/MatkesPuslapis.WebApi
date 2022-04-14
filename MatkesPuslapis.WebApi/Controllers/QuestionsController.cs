@@ -33,5 +33,23 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_questionServices.GetQuestions());
         }
+
+        [HttpGet("{id}", Name = "GetQuestion")]
+        public IActionResult GetTest(string id)
+        {
+            return Ok("Not implemented");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateQuestion(Question question)
+        {
+            return Ok("Not implemented");
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteQuestion(string id)
+        {
+            return Ok("Not implemented");
+        }
     }
 }

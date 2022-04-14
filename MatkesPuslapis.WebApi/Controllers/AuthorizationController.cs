@@ -63,5 +63,10 @@ namespace MatkesPuslapis.WebApi.Controllers
             //return Ok();
             return Ok(token);
         }
+        [HttpPost("logout")]
+        public IActionResult Authenticate2([FromBody] UserLoginCredentials userCredentials)
+        {
+            return Ok("Not implemented");
+        }
     }
 }

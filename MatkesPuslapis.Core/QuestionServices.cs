@@ -50,5 +50,19 @@ namespace MatkesPuslapis.Core
             }
             return exists;
         }
+
+        public bool NameExists(string name)
+        {
+            bool exists = true;
+            try
+            {
+                _questions.Find(user => user.Name == name).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
     }
 }

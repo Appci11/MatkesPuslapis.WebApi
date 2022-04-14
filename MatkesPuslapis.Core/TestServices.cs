@@ -20,7 +20,34 @@ namespace MatkesPuslapis.Core
             return test;
         }
 
+        public void DeleteTest(string id)
+        {
+            _tests.DeleteOne(test => test.Id == id);
+        }
+
+        public Test GetTest(string id) => _tests.Find(test => test.Id == id).First();
+
         public List<Test> GetTests() => _tests.Find(test => true).ToList();
 
+        public bool NameExists(string name)
+        {
+            bool exists = true;
+            try
+            {
+                _tests.Find(user => user.Name == name).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
+
+        public Test UpdateTest(Test test)
+        {
+            GetTest(test.Id);
+            _tests.ReplaceOne(u => u.Id == test.Id, test);
+            return test;
+        }
     }
 }
