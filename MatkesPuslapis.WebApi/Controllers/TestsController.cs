@@ -1,6 +1,7 @@
 ﻿//Bet ko bandymams/testavimui. Uzbaigtai programai nereikalinga
 
 using MatkesPuslapis.Core;
+using MatkesPuslapis.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,6 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_testServices.GetTests());
         }
-
         [HttpGet("{id}", Name = "GetTest")]
         public IActionResult GetTest(string id)
         {

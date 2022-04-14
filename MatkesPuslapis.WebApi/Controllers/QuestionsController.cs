@@ -24,6 +24,8 @@ namespace MatkesPuslapis.WebApi.Controllers
         [HttpPost]
         public IActionResult AddQuestion(Question question)
         {
+            if (_questionServices.NameExists(question.Name))
+                return StatusCode(406, new { Name = "Already exists" });
             _questionServices.AddQuestion(question);
             return CreatedAtRoute("GetQuestion", new { id = question.Id }, question);
         }
@@ -35,21 +37,45 @@ namespace MatkesPuslapis.WebApi.Controllers
         }
 
         [HttpGet("{id}", Name = "GetQuestion")]
-        public IActionResult GetTest(string id)
+        public IActionResult GetQuestion(string id)
         {
-            return Ok("Not implemented");
+            try
+            {
+                return Ok(_questionServices.GetQuestion(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
         public IActionResult UpdateQuestion(Question question)
         {
-            return Ok("Not implemented");
+            if (_questionServices.NameExists(question.Name))
+                return StatusCode(406, new { Name = "Already exists" });
+            try
+            {
+                return Ok(_questionServices.UpdateQuestion(question));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteQuestion(string id)
         {
-            return Ok("Not implemented");
+            try
+            {
+                _questionServices.DeleteQuestion(id);
+                return Ok("Deletion Successful");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
