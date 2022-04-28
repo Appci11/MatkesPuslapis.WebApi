@@ -42,11 +42,11 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             bool a = jwtAuthenticationManager.UsernameExists(userCredentials.Username);
             bool b = jwtAuthenticationManager.EmailExists(userCredentials.Email);
-            if (a && b) return StatusCode(406, new { Name = "Already exists", Email = "Already exists" });
-            if (a) return StatusCode(406, new { Name = "Already exists" });
+            if (a && b) return StatusCode(406, new { Username = "Already exists", Email = "Already exists" });
+            if (a) return StatusCode(406, new { Username = "Already exists" });
             if (b) return StatusCode(406, new { Email = "Already exists" });
             jwtAuthenticationManager.AddUser(userCredentials.Username, userCredentials.Email, userCredentials.Password);
-            return Ok(new { Name = userCredentials.Username, Email = userCredentials.Email, Status = "Registered" });
+            return Ok(new { Username = userCredentials.Username, Email = userCredentials.Email, Status = "Registered" });
         }
 
         [HttpPost("login")]

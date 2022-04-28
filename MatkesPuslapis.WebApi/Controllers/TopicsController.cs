@@ -46,7 +46,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         }
 
         [HttpGet("name/{name}", Name = "GetStoryByName")]
-        public IActionResult GetStoryByName(string name)
+        public IActionResult GetStoryByName(int name)
         {
             try
             {

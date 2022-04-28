@@ -1,4 +1,5 @@
 ﻿using MatkesPuslapis.Core;
+using MatkesPuslapis.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -20,12 +21,21 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             _userServices = userServices;
         }
+
+        [HttpPost]
+        public IActionResult AddUser(User user)
+        {
+            _userServices.AddUser(user);
+            //return Ok();
+            return CreatedAtRoute("GetUser", new { id = user.Id }, user);
+        }
+
         [HttpGet]
         public IActionResult GetUsers()
         {
             return Ok(_userServices.GetUsers());
         }
-        [Authorize]
+
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult GetUser(string id)
         {
@@ -38,25 +48,7 @@ namespace MatkesPuslapis.WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
-        public IActionResult AddUser(User user)
-        {
-            _userServices.AddUser(user);
-            return CreatedAtRoute("GetUser", new { id = user.Id }, user);
-        }
-        [HttpDelete("{id}")]
-        public IActionResult DeleteUser(string id)
-        {
-            try
-            {
-                _userServices.DeleteUser(id);
-                return NoContent();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+
         [HttpPut]
         public IActionResult UpdateUser(User user)
         {
@@ -70,21 +62,63 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("register")]
-        public IActionResult AddUser(string name, string email, string password)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(string id)
         {
-            if (_userServices.UsernameExists(name)) { return Ok(1); }
-            if (_userServices.EmailExists(email)) { return Ok(2); }
-            _userServices.AddUser(name, email, password);
-            return Ok(0);
+            try
+            {
+                _userServices.DeleteUser(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [Authorize]
-        [HttpGet("Test")]
-        public IActionResult Test()
+        [HttpPatch("addSolvedTopic")]
+        public IActionResult AddSolvedTopic(UserTopic userTopic)
         {
-            return Ok("Pro autorizacija praeita sekmingai");
+            try
+            {
+                return Ok(_userServices.AddSolvedTopic(userTopic));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        [HttpPatch("removeSolvedTopic")]
+        public IActionResult RemoveSolvedTopic(UserTopic userTopic)
+        {
+            try
+            {
+                return Ok(_userServices.RemoveSolvedTopic(userTopic));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+        //[HttpPost]
+        //[Route("register")]
+        //public IActionResult AddUser(string username, string email, string password)
+        //{
+        //    if (_userServices.UsernameExists(username)) { return Ok(1); }
+        //    if (_userServices.EmailExists(email)) { return Ok(2); }
+        //    _userServices.AddUser(username, email, password);
+        //    return Ok(0);
+        //}
+
+        //[Authorize]
+        //[HttpGet("Test")]
+        //public IActionResult Test()
+        //{
+        //    return Ok("Pro autorizacija praeita sekmingai");
+        //}
     }
 }
