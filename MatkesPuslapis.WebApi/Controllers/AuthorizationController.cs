@@ -66,7 +66,11 @@ namespace MatkesPuslapis.WebApi.Controllers
         [HttpPost("logout")]
         public IActionResult Authenticate2([FromBody] UserLoginCredentials userCredentials)
         {
-            return Ok("Not implemented");
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.HttpOnly = true;
+            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddMilliseconds(1));
+            this.HttpContext.Response.Cookies.Append("Session", "", cookieOptions);
+            return Ok();
         }
     }
 }
