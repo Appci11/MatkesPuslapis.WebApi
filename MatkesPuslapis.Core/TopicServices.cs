@@ -9,37 +9,37 @@ using System.Threading.Tasks;
 
 namespace MatkesPuslapis.Core
 {
-    public class StoryServices : IStoryServices
+    public class TopicServices : ITopicServices
     {
-        private readonly IMongoCollection<Story> _stories;
-        public StoryServices(IDbClient dbClient)
+        private readonly IMongoCollection<Topic> _stories;
+        public TopicServices(IDbClient dbClient)
         {
             _stories = dbClient.GetStoriesCollection();
         }
 
-        public Story AddStory(Story story)
+        public Topic AddTopic(Topic story)
         {
             _stories.InsertOne(story);
             return story;
         }
 
-        public void DeleteStory(string id)
+        public void DeleteTopic(string id)
         {
             _stories.DeleteOne(story => story.Id == id);
         }
 
-        public List<Story> GetStories() => _stories.Find(story => true).ToList();
+        public List<Topic> GetTopics() => _stories.Find(story => true).ToList();
 
-        public Story GetStory(string id) => _stories.Find(story => story.Id == id).First();
+        public Topic GetTopic(string id) => _stories.Find(story => story.Id == id).First();
 
-        public Story GetStoryByName(string name) => _stories.Find(story => story.Name == name).First();
+        public Topic GetTopicByIndex(string name) => _stories.Find(story => story.Title == name).First();
 
-        public bool NameExists(string name)
+        public bool TopicExists(string name)
         {
             bool exists = true;
             try
             {
-                _stories.Find(story => story.Name == name).First();
+                _stories.Find(story => story.Title == name).First();
             }
             catch (Exception ex)
             {
@@ -48,9 +48,9 @@ namespace MatkesPuslapis.Core
             return exists;
         }
 
-        public Story UpdateStory(Story story)
+        public Topic UpdateTopic(Topic story)
         {
-            GetStory(story.Id);
+            GetTopic(story.Id);
             _stories.ReplaceOne(t => t.Id == story.Id, story);
             return story;
         }

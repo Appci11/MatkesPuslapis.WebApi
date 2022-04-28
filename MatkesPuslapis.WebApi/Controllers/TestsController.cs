@@ -1,4 +1,4 @@
-﻿//Bet ko bandymams/testavimui. Uzbaigtai programai nereikalinga
+﻿//Praktiskai nenaudojama, lieka, nes kitai lentelei atsiradus, uzteks pervadint
 
 using MatkesPuslapis.Core;
 using MatkesPuslapis.Core.Models;

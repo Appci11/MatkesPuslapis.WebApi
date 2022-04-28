@@ -22,7 +22,7 @@ namespace MatkesPuslapis.Core
         public User AddUser(string username, string email, string password)
         {
             User user = new User();
-            user.Name = username;
+            user.Username = username;
             user.EMail = email;
             user.Password = password;
             _users.InsertOne(user);
@@ -43,7 +43,7 @@ namespace MatkesPuslapis.Core
         //    {
         //        new User
         //        {
-        //            Name = "Test",
+        //            Title = "Test",
         //            EMail = "Pastas@Post.com"
         //        }
         //    };
@@ -63,7 +63,7 @@ namespace MatkesPuslapis.Core
             bool exists = true;
             try
             {
-                _users.Find(user => user.Name == username).First();
+                _users.Find(user => user.Username == username).First();
             }
             catch (Exception ex)
             {

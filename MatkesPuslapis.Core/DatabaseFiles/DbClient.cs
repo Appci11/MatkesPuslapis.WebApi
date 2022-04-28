@@ -14,7 +14,7 @@ namespace MatkesPuslapis.Core
         private readonly IMongoCollection<User> _users;
         private readonly IMongoCollection<Test> _tests;
         private readonly IMongoCollection<Question> _questions;
-        private readonly IMongoCollection<Story> _stories;
+        private readonly IMongoCollection<Topic> _stories;
         public DbClient(IOptions<MatkesPuslapisDbConfig> matkesPuslapisDbConfig)
         {
             var client = new MongoClient(matkesPuslapisDbConfig.Value.Connection_String);
@@ -22,12 +22,12 @@ namespace MatkesPuslapis.Core
             _users = database.GetCollection<User>(matkesPuslapisDbConfig.Value.Users_Collection_Name);
             _tests = database.GetCollection<Test>(matkesPuslapisDbConfig.Value.Tests_Collection_Name);
             _questions = database.GetCollection<Question>(matkesPuslapisDbConfig.Value.Questions_Collection_Name);
-            _stories = database.GetCollection<Story>(matkesPuslapisDbConfig.Value.Stories_Collection_Name);
+            _stories = database.GetCollection<Topic>(matkesPuslapisDbConfig.Value.Stories_Collection_Name);
 
         }
         public IMongoCollection<User> GetUsersCollection() => _users;
         public IMongoCollection<Test> GetTestsCollection() => _tests;
         public IMongoCollection<Question> GetQuestionsCollection() => _questions;
-        public IMongoCollection<Story> GetStoriesCollection() => _stories;
+        public IMongoCollection<Topic> GetStoriesCollection() => _stories;
     }
 }

@@ -9,35 +9,35 @@ namespace MatkesPuslapis.WebApi.Controllers
     [EnableCors]
     [ApiController]
     [Route("[controller]")]
-    public class StoriesController : Controller
+    public class TopicsController : Controller
     {
-        private readonly IStoryServices _storyServices;
-        public StoriesController(IStoryServices storyServices)
+        private readonly ITopicServices _storyServices;
+        public TopicsController(ITopicServices storyServices)
         {
             _storyServices = storyServices;
         }
 
         [HttpPost]
-        public IActionResult AddStory(Story story)
+        public IActionResult AddStory(Topic story)
         {
-            if (_storyServices.NameExists(story.Name))
+            if (_storyServices.TopicExists(story.Title))
                 return StatusCode(406, new { Name = "Already exists" });
-            _storyServices.AddStory(story);
+            _storyServices.AddTopic(story);
             return CreatedAtRoute("GetQuestion", new { id = story.Id }, story);
         }
 
         [HttpGet]
         public IActionResult GetStories()
         {
-            return Ok(_storyServices.GetStories());
+            return Ok(_storyServices.GetTopics());
         }
 
-        [HttpGet("{id}", Name = "GetStory")]
+        [HttpGet("{id}", Name = "GetTopic")]
         public IActionResult GetStory(string id)
         {
             try
             {
-                return Ok(_storyServices.GetStory(id));
+                return Ok(_storyServices.GetTopic(id));
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             try
             {
-                return Ok(_storyServices.GetStoryByName(name));
+                return Ok(_storyServices.GetTopicByIndex(name));
             }
             catch (Exception ex)
             {
@@ -59,13 +59,13 @@ namespace MatkesPuslapis.WebApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateStory(Story story)
+        public IActionResult UpdateStory(Topic story)
         {
-            if (_storyServices.NameExists(story.Name))
+            if (_storyServices.TopicExists(story.Title))
                 return StatusCode(406, new { Name = "Already exists" });
             try
             {
-                return Ok(_storyServices.UpdateStory(story));
+                return Ok(_storyServices.UpdateTopic(story));
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             try
             {
-                _storyServices.DeleteStory(id);
+                _storyServices.DeleteTopic(id);
                 return Ok("Deletion Successful");
             }
             catch (Exception ex)

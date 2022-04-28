@@ -29,8 +29,8 @@ namespace MatkesPuslapis.WebApi.Controllers
         //{
         //    bool a = jwtAuthenticationManager.UsernameExists(name);
         //    bool b = jwtAuthenticationManager.EmailExists(email);
-        //    if(a && b) return StatusCode(406, new { Name = "Already exists", Email = "Already exists" });
-        //    if (a) return StatusCode(406, new { Name = "Already exists"});
+        //    if(a && b) return StatusCode(406, new { Title = "Already exists", Email = "Already exists" });
+        //    if (a) return StatusCode(406, new { Title = "Already exists"});
         //    if (b) return StatusCode(406, new { Email = "Already exists" });
         //    jwtAuthenticationManager.AddUser(name, email, password);
         //    return Ok("Registered");
@@ -40,13 +40,13 @@ namespace MatkesPuslapis.WebApi.Controllers
         [Route("register")]
         public IActionResult AddUser([FromBody] UserRegisterCredentials userCredentials)
         {
-            bool a = jwtAuthenticationManager.UsernameExists(userCredentials.Name);
+            bool a = jwtAuthenticationManager.UsernameExists(userCredentials.Username);
             bool b = jwtAuthenticationManager.EmailExists(userCredentials.Email);
             if (a && b) return StatusCode(406, new { Name = "Already exists", Email = "Already exists" });
             if (a) return StatusCode(406, new { Name = "Already exists" });
             if (b) return StatusCode(406, new { Email = "Already exists" });
-            jwtAuthenticationManager.AddUser(userCredentials.Name, userCredentials.Email, userCredentials.Password);
-            return Ok(new { Name = userCredentials.Name, Email = userCredentials.Email, Status = "Registered" });
+            jwtAuthenticationManager.AddUser(userCredentials.Username, userCredentials.Email, userCredentials.Password);
+            return Ok(new { Name = userCredentials.Username, Email = userCredentials.Email, Status = "Registered" });
         }
 
         [HttpPost("login")]
@@ -68,7 +68,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             CookieOptions cookieOptions = new CookieOptions();
             cookieOptions.HttpOnly = true;
-            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddMilliseconds(1));
+            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddMilliseconds(0));
             this.HttpContext.Response.Cookies.Append("Session", "", cookieOptions);
             return Ok();
         }

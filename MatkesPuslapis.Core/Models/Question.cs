@@ -11,28 +11,23 @@ namespace MatkesPuslapis.Core
     {
         public Question()
         {
+            PossibleAnswers = new List<string>();
         }
 
-        public Question(string name, string questionText, string answer1, string answer2, string answer3, string answer4, string correct)
+        public Question(string topicId, string correctAnswer, string questionText)
         {
-            Name = name;
-            QuestionText = questionText;
-            Answer1 = answer1;
-            Answer2 = answer2;
-            Answer3 = answer3;
-            Answer4 = answer4;
-            Correct = correct;
+            TopicId = topicId;
+            CorrectAnswer = correctAnswer;
+            this.questionText = questionText;
+            PossibleAnswers = new List<string>();
         }
 
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string QuestionText { get; set; }
-        public string Answer1 { get; set; }
-        public string Answer2 { get; set; }
-        public string Answer3 { get; set; }
-        public string Answer4 { get; set; }
-        public string Correct { get; set; }
+        public string TopicId { get; set; }
+        public List<String> PossibleAnswers { get; set; }
+        public string CorrectAnswer { get; set; }
+        public string questionText { get; set; }
     }
 }
