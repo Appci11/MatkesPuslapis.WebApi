@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MatkesPuslapis.Core.Models;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace MatkesPuslapis.Core
         IMongoCollection<User> GetUsersCollection();
         IMongoCollection<Test> GetTestsCollection();
         IMongoCollection<Question> GetQuestionsCollection();
+        IMongoCollection<Story> GetStoriesCollection();
     }
 }

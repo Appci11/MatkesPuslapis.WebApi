@@ -28,6 +28,8 @@ namespace MatkesPuslapis.Core
 
         public Question GetQuestion(string id) => _questions.Find(question => question.Id == id).First();
 
+        public Question GetQuestionByName(string name) => _questions.Find(question => question.Name == name).First();
+
         public List<Question> GetQuestions() => _questions.Find(question => true).ToList();
 
         public Question UpdateQuestion(Question question)

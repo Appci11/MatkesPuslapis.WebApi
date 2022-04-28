@@ -12,6 +12,7 @@ namespace MatkesPuslapis.Core.Interfaces
         List<Story> GetStories();
         Story AddStory(Story story);
         Story GetStory(string id);
+        Story GetStoryByName(string id);
         void DeleteStory(string id);
         Story UpdateStory(Story story);
         bool NameExists(string name);

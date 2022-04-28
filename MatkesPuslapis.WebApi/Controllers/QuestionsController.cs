@@ -49,6 +49,19 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
+        [HttpGet("name/{name}", Name = "GetQuestionByName")]
+        public IActionResult GetQuestionByName(string name)
+        {
+            try
+            {
+                return Ok(_questionServices.GetQuestionByName(name));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPut]
         public IActionResult UpdateQuestion(Question question)
         {

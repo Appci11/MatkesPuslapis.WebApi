@@ -38,12 +38,26 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             return Ok(_testServices.GetTests());
         }
+
         [HttpGet("{id}", Name = "GetTest")]
         public IActionResult GetTest(string id)
         {
             try
             {
                 return Ok(_testServices.GetTest(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("name/{name}", Name = "GetTestByName")]
+        public IActionResult GetTestByName(string name)
+        {
+            try
+            {
+                return Ok(_testServices.GetTestByName(name));
             }
             catch (Exception ex)
             {

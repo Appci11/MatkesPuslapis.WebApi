@@ -12,10 +12,9 @@ namespace MatkesPuslapis.Core
     public class StoryServices : IStoryServices
     {
         private readonly IMongoCollection<Story> _stories;
-
-        public StoryServices(IMongoCollection<Story> stories)
+        public StoryServices(IDbClient dbClient)
         {
-            _stories = stories;
+            _stories = dbClient.GetStoriesCollection();
         }
 
         public Story AddStory(Story story)
@@ -32,6 +31,8 @@ namespace MatkesPuslapis.Core
         public List<Story> GetStories() => _stories.Find(story => true).ToList();
 
         public Story GetStory(string id) => _stories.Find(story => story.Id == id).First();
+
+        public Story GetStoryByName(string name) => _stories.Find(story => story.Name == name).First();
 
         public bool NameExists(string name)
         {

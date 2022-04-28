@@ -10,6 +10,7 @@ namespace MatkesPuslapis.Core.Interfaces
     {
         List<Question> GetQuestions();
         Question GetQuestion(string id);
+        Question GetQuestionByName(string id);
         Question AddQuestion(Question question);
         void DeleteQuestion(string id);
         Question UpdateQuestion(Question question);

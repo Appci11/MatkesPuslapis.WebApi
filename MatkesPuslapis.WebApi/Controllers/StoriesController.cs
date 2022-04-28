@@ -45,6 +45,19 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
+        [HttpGet("name/{name}", Name = "GetStoryByName")]
+        public IActionResult GetStoryByName(string name)
+        {
+            try
+            {
+                return Ok(_storyServices.GetStoryByName(name));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPut]
         public IActionResult UpdateStory(Story story)
         {

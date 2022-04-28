@@ -27,6 +27,8 @@ namespace MatkesPuslapis.Core
 
         public Test GetTest(string id) => _tests.Find(test => test.Id == id).First();
 
+        public Test GetTestByName(string name) => _tests.Find(test => test.Name == name).First();
+
         public List<Test> GetTests() => _tests.Find(test => true).ToList();
 
         public bool NameExists(string name)

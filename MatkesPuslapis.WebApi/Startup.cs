@@ -70,10 +70,12 @@ namespace MatkesPuslapis.WebApi
                     
                 };
             });
-
+            
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<ITestServices, TestServices>();
             services.AddTransient<IQuestionServices, QuestionServices>();
+            services.AddTransient<IStoryServices, StoryServices>();
+
 
 
             services.AddControllers();
