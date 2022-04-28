@@ -14,6 +14,22 @@ namespace MatkesPuslapis.Core.Models
             Questions = new List<Question>();
         }
 
+        public Topic(TopicCreation tc)
+        {
+            Title = tc.Title;
+            Text = tc.Text;
+            Index = tc.Index;
+            Questions = new List<Question>();
+        }
+
+        public Topic(TopicEdit te)
+        {
+            Title = te.Title;
+            Text = te.Text;
+            Index = te.Index;
+        }
+
+        //potencialiai trinamas
         public Topic(string title, string text, int index)
         {
             Title = title;

@@ -17,17 +17,27 @@ namespace MatkesPuslapis.Core
         public Question(string topicId, string correctAnswer, string questionText)
         {
             TopicId = topicId;
+            QuestionText = questionText;
             CorrectAnswer = correctAnswer;
-            this.questionText = questionText;
             PossibleAnswers = new List<string>();
         }
 
-        [BsonId]
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        public Question(string topicId, string id, string correctAnswer, string questionText)
+        {
+            Id = id;
+            TopicId = topicId;
+            QuestionText = questionText;
+            CorrectAnswer = correctAnswer;
+            PossibleAnswers = new List<string>();
+        }
+
+        //paprastas string, MongoDB automatiskai nekuria
+        //[BsonId]
+        //[BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
         public string TopicId { get; set; }
-        public List<String> PossibleAnswers { get; set; }
+        public string QuestionText { get; set; }
         public string CorrectAnswer { get; set; }
-        public string questionText { get; set; }
+        public List<String> PossibleAnswers { get; set; }
     }
 }

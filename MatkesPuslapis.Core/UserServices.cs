@@ -70,24 +70,20 @@ namespace MatkesPuslapis.Core
 
         public User AddSolvedTopic(UserTopic userTopic)
         {
-            {
-                User user = GetUser(userTopic.UserId);
-                user.SolvedTopics.Add(userTopic.TopicId);
-                _users.ReplaceOne(u => u.Id == user.Id, user);
+            User user = GetUser(userTopic.UserId);
+            user.SolvedTopics.Add(userTopic.TopicId);
+            _users.ReplaceOne(u => u.Id == user.Id, user);
 
-                return user;
-            }
+            return user;
         }
 
         public User RemoveSolvedTopic(UserTopic userTopic)
         {
-            {
-                User user = GetUser(userTopic.UserId);
-                user.SolvedTopics.Remove(userTopic.TopicId);
-                _users.ReplaceOne(u => u.Id == user.Id, user);
+            User user = GetUser(userTopic.UserId);
+            user.SolvedTopics.Remove(userTopic.TopicId);
+            _users.ReplaceOne(u => u.Id == user.Id, user);
 
-                return user;
-            }
+            return user;
         }
 
         //public User UpdateUser(User user)

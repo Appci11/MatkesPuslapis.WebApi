@@ -11,25 +11,28 @@ namespace MatkesPuslapis.WebApi.Controllers
     [Route("[controller]")]
     public class TopicsController : Controller
     {
-        private readonly ITopicServices _storyServices;
-        public TopicsController(ITopicServices storyServices)
+        private readonly ITopicServices _topicServices;
+        public TopicsController(ITopicServices topicServices)
         {
-            _storyServices = storyServices;
+            _topicServices = topicServices;
         }
 
         [HttpPost]
-        public IActionResult AddStory(Topic story)
+        public IActionResult AddTopic(TopicCreation topic)
         {
-            if (_storyServices.TopicExists(story.Title))
-                return StatusCode(406, new { Name = "Already exists" });
-            _storyServices.AddTopic(story);
-            return CreatedAtRoute("GetQuestion", new { id = story.Id }, story);
+            if (_topicServices.TopicExists(topic.Title))
+                return StatusCode(406, new { Title = "Already exists" });
+            if (_topicServices.IndexExists(topic.Index))
+                return StatusCode(406, new { Index = "Already exists" });
+            _topicServices.AddTopic(topic);
+            return Ok(topic);
+            //return CreatedAtRoute("GetTopic", new { id = topic.Id }, topic);
         }
 
         [HttpGet]
-        public IActionResult GetStories()
+        public IActionResult GetTopics()
         {
-            return Ok(_storyServices.GetTopics());
+            return Ok(_topicServices.GetTopics());
         }
 
         [HttpGet("{id}", Name = "GetTopic")]
@@ -37,7 +40,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             try
             {
-                return Ok(_storyServices.GetTopic(id));
+                return Ok(_topicServices.GetTopic(id));
             }
             catch (Exception ex)
             {
@@ -45,12 +48,12 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        [HttpGet("name/{name}", Name = "GetStoryByName")]
-        public IActionResult GetStoryByName(int name)
+        [HttpGet("index/{index}", Name = "GetStoryByName")]
+        public IActionResult GetStoryByName(int index)
         {
             try
             {
-                return Ok(_storyServices.GetTopicByIndex(name));
+                return Ok(_topicServices.GetTopicByIndex(index));
             }
             catch (Exception ex)
             {
@@ -58,14 +61,19 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
+        //100% egzistuoja bugai, bet nzn ar butina rodyt
+        //tarkim nurodau pakeist tik Title, bet index lieka, tokiu atveju sauks,
+        //kad irasas su tokiu Index jau egzistuoja
         [HttpPut]
-        public IActionResult UpdateStory(Topic story)
+        public IActionResult UpdateTopic(TopicEdit topic)
         {
-            if (_storyServices.TopicExists(story.Title))
-                return StatusCode(406, new { Name = "Already exists" });
+            if (_topicServices.TopicExists(topic.Title))
+                return StatusCode(406, new { Title = "Already exists" });
+            if (_topicServices.IndexExists(topic.Index))
+                return StatusCode(406, new { Index = "Already exists" });
             try
             {
-                return Ok(_storyServices.UpdateTopic(story));
+                return Ok(_topicServices.UpdateTopic(topic));
             }
             catch (Exception ex)
             {
@@ -74,11 +82,11 @@ namespace MatkesPuslapis.WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteStory(string id)
+        public IActionResult DeleteTopic(string id)
         {
             try
             {
-                _storyServices.DeleteTopic(id);
+                _topicServices.DeleteTopic(id);
                 return Ok("Deletion Successful");
             }
             catch (Exception ex)
@@ -86,5 +94,31 @@ namespace MatkesPuslapis.WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPatch("addQuestion")]
+        public IActionResult AddSolvedTopic(TopicQuestion topicQuestion)
+        {
+            try
+            {
+                return Ok(_topicServices.AddQuestion(topicQuestion));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //[HttpPatch("removeSolvedTopic")]
+        //public IActionResult RemoveSolvedTopic(UserTopic userTopic)
+        //{
+        //    try
+        //    {
+        //        return Ok(_userServices.RemoveSolvedTopic(userTopic));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

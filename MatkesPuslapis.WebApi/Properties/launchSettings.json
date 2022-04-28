@@ -19,6 +19,7 @@
         "USERS_COLLECTION_NAME": "Users",
         "TESTS_COLLECTION_NAME": "Tests",
         "QUESTIONS_COLLECTION_NAME": "Questions",
+        "TOPICS_COLLECTION_NAME": "Topics",
         "STORIES_COLLECTION_NAME": "Stories"
       }
     },
@@ -34,6 +35,7 @@
         "USERS_COLLECTION_NAME": "Users",
         "TESTS_COLLECTION_NAME": "Tests",
         "QUESTIONS_COLLECTION_NAME": "Questions",
+        "TOPICS_COLLECTION_NAME": "Topics",
         "STORIES_COLLECTION_NAME": "Stories"
       }
     }
