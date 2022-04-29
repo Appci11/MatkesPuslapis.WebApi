@@ -95,6 +95,7 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
+        //patikrinimo reikia, ar Question tokiu id jau neegzistuoja
         [HttpPatch("addQuestion")]
         public IActionResult AddSolvedTopic(TopicQuestion topicQuestion)
         {
@@ -108,17 +109,35 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        //[HttpPatch("removeSolvedTopic")]
-        //public IActionResult RemoveSolvedTopic(UserTopic userTopic)
+        //[HttpPatch("bandymas")]
+        //public IActionResult Bandymas(TopicQuestionDelete topicQuestionDelete)
         //{
         //    try
         //    {
-        //        return Ok(_userServices.RemoveSolvedTopic(userTopic));
+        //        return Ok(_topicServices.Bandymas(topicQuestionDelete));
         //    }
         //    catch (Exception ex)
         //    {
         //        return BadRequest(ex.Message);
         //    }
         //}
+
+        [HttpPatch("removeQuestion")]
+        public IActionResult Bandymas(TopicQuestionDelete topicQuestionDelete)
+        {
+            return Ok();
+        }
+
+        [HttpPatch("question/addPossibleAnswer")]
+        public IActionResult Bandymas2(TopicQuestionDelete topicQuestionDelete)
+        {
+            return Ok();
+        }
+
+        [HttpPatch("question/removePossibleAnswer")]
+        public IActionResult Bandymas3(TopicQuestionDelete topicQuestionDelete)
+        {
+            return Ok();
+        }
     }
 }

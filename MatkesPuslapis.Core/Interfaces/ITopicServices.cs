@@ -19,5 +19,6 @@ namespace MatkesPuslapis.Core.Interfaces
         bool IndexExists(int index);
         Topic AddQuestion(TopicQuestion topicQuestion);
         Topic RemoveQuestion(TopicQuestion topicQuestion);
+        string Bandymas(TopicQuestionDelete topicQuestionDelete);
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace MatkesPuslapis.Core.Models
 {
-    public class TopicQuestion
+    public class TopicQuestionDelete
     {
         public string TopicId { get; set; }
-        public string QuestionText { get; set; }
-        public string CorrectAnswer { get; set; }
+        public string QuestionId { get; set; }
     }
 }

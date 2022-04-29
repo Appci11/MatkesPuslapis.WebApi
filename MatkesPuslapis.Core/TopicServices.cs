@@ -76,7 +76,21 @@ namespace MatkesPuslapis.Core
         public Topic AddQuestion(TopicQuestion topicQuestion)
         {
             Topic topic = GetTopic(topicQuestion.TopicId);
-            Question question = new Question(topicQuestion.TopicId, topicQuestion.QuestionId, topicQuestion.QuestionText, topicQuestion.CorrectAnswer);
+            int max = 0;
+            string qId = "";        //question ID
+            foreach (var element in topic.Questions)
+            {
+                int sk = Int32.Parse(element.Id);
+                if (sk > max)
+                    max = sk;
+            }
+
+            if (topic.Questions.Count > 0)
+            {
+                max++;
+            }
+            qId = max.ToString();
+            Question question = new Question(topicQuestion.TopicId, qId, topicQuestion.QuestionText, topicQuestion.CorrectAnswer);
             topic.Questions.Add(question);
             _topics.ReplaceOne(t => t.Id == topic.Id, topic);
 
@@ -87,6 +101,27 @@ namespace MatkesPuslapis.Core
         public Topic RemoveQuestion(TopicQuestion topicQuestion)
         {
             throw new NotImplementedException();
+        }
+
+        public string Bandymas(TopicQuestionDelete topicQuestionDelete)
+        {
+            Topic topic = GetTopic(topicQuestionDelete.TopicId);
+            bool exists = false;
+            int i = -1;
+            foreach (var element in topic.Questions)
+            {
+                i++;
+                if (string.Compare(element.Id, topicQuestionDelete.QuestionId) == 0)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            //jei egzistuoja grazins Code 200, jei ne 204
+            if (exists)
+                return i.ToString();
+            else return null;
+
         }
     }
 }
