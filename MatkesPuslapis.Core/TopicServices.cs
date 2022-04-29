@@ -97,13 +97,7 @@ namespace MatkesPuslapis.Core
             return topic;
         }
 
-        //ties cia baigta
-        public Topic RemoveQuestion(TopicQuestion topicQuestion)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Bandymas(TopicQuestionDelete topicQuestionDelete)
+        public Topic RemoveQuestion(TopicQuestionDelete topicQuestionDelete)
         {
             Topic topic = GetTopic(topicQuestionDelete.TopicId);
             bool exists = false;
@@ -119,9 +113,67 @@ namespace MatkesPuslapis.Core
             }
             //jei egzistuoja grazins Code 200, jei ne 204
             if (exists)
-                return i.ToString();
-            else return null;
+            {
+                topic.Questions.RemoveAt(i);
+            }
+            else
+            {
+                return null;
+            }
+            _topics.ReplaceOne(t => t.Id == topic.Id, topic);
+            return topic;
+        }
 
+        public Topic AddPossibleAnswerByText(PossibleAnswer possibleAnswer)
+        {
+            Topic topic = GetTopic(possibleAnswer.TopicId);
+            bool exists = false;
+            foreach (var klausimas in topic.Questions)
+            {
+                foreach (var elementas in klausimas.PossibleAnswers)
+                {
+                    if (string.Compare(elementas, possibleAnswer.Text) == 0)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+            if (exists)
+            {
+                return null;
+            }
+            int questionId = int.Parse(possibleAnswer.QuestionId);
+            topic.Questions[questionId].PossibleAnswers.Add(possibleAnswer.Text);
+            _topics.ReplaceOne(t => t.Id == topic.Id, topic);
+
+            return topic;
+        }
+
+        public string Bandymas(PossibleAnswer possibleAnswer)
+        {
+            Topic topic = GetTopic(possibleAnswer.TopicId);
+            bool exists = false;
+            foreach(var klausimas in topic.Questions)
+            {
+                foreach(var elementas in klausimas.PossibleAnswers)
+                {
+                    if(string.Compare(elementas, possibleAnswer.Text) == 0)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+            if(exists)
+            {
+                return "Possible answers already exists";
+            }
+            int questionId = int.Parse(possibleAnswer.QuestionId);
+            topic.Questions[questionId].PossibleAnswers.Add(possibleAnswer.Text);
+
+
+            return "possible answer added";
         }
     }
 }

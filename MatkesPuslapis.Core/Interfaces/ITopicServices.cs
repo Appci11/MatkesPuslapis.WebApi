@@ -18,7 +18,8 @@ namespace MatkesPuslapis.Core.Interfaces
         bool TopicExists(string title);
         bool IndexExists(int index);
         Topic AddQuestion(TopicQuestion topicQuestion);
-        Topic RemoveQuestion(TopicQuestion topicQuestion);
-        string Bandymas(TopicQuestionDelete topicQuestionDelete);
+        Topic RemoveQuestion(TopicQuestionDelete topicQuestionDelete);
+        Topic AddPossibleAnswerByText(PossibleAnswer possibleAnswer);
+        string Bandymas(PossibleAnswer possibleAnswer);
     }
 }

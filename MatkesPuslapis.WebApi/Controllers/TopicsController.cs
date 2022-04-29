@@ -109,35 +109,55 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        //[HttpPatch("bandymas")]
-        //public IActionResult Bandymas(TopicQuestionDelete topicQuestionDelete)
+        [HttpPatch("removeQuestion")]
+        public IActionResult RemoveQuestion(TopicQuestionDelete topicQuestionDelete)
+        {
+            try
+            {
+                return Ok(_topicServices.RemoveQuestion(topicQuestionDelete));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("question/addPossibleAnswerByText")]
+        public IActionResult AddPossibleAnswerByText(PossibleAnswer possibleAnswer)
+        {
+            try
+            {
+                return Ok(_topicServices.AddPossibleAnswerByText(possibleAnswer));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("bandymas")]
+        public IActionResult Bandymas(PossibleAnswer possibleAnswer)
+        {
+            try
+            {
+                return Ok(_topicServices.Bandymas(possibleAnswer));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //[HttpPatch("question/addPossibleAnswer")]
+        //public IActionResult Bandymas2(TopicQuestionDelete topicQuestionDelete)
         //{
-        //    try
-        //    {
-        //        return Ok(_topicServices.Bandymas(topicQuestionDelete));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
+        //    return Ok();
         //}
 
-        [HttpPatch("removeQuestion")]
-        public IActionResult Bandymas(TopicQuestionDelete topicQuestionDelete)
-        {
-            return Ok();
-        }
-
-        [HttpPatch("question/addPossibleAnswer")]
-        public IActionResult Bandymas2(TopicQuestionDelete topicQuestionDelete)
-        {
-            return Ok();
-        }
-
-        [HttpPatch("question/removePossibleAnswer")]
-        public IActionResult Bandymas3(TopicQuestionDelete topicQuestionDelete)
-        {
-            return Ok();
-        }
+        //[HttpPatch("question/removePossibleAnswer")]
+        //public IActionResult Bandymas3(TopicQuestionDelete topicQuestionDelete)
+        //{
+        //    return Ok();
+        //}
     }
 }
