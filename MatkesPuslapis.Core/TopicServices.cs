@@ -130,12 +130,15 @@ namespace MatkesPuslapis.Core
             bool exists = false;
             foreach (var klausimas in topic.Questions)
             {
-                foreach (var elementas in klausimas.PossibleAnswers)
+                if (string.Compare(klausimas.Id, possibleAnswer.QuestionId) == 0)
                 {
-                    if (string.Compare(elementas, possibleAnswer.Text) == 0)
+                    foreach (var elementas in klausimas.PossibleAnswers)
                     {
-                        exists = true;
-                        break;
+                        if (string.Compare(elementas, possibleAnswer.Text) == 0)
+                        {
+                            exists = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -150,30 +153,59 @@ namespace MatkesPuslapis.Core
             return topic;
         }
 
-        public string Bandymas(PossibleAnswer possibleAnswer)
+        public Topic RemovePossibleAnswerByText(PossibleAnswer possibleAnswer)
         {
             Topic topic = GetTopic(possibleAnswer.TopicId);
             bool exists = false;
-            foreach(var klausimas in topic.Questions)
+            int i = -1;
+            foreach (var klausimas in topic.Questions)
             {
-                foreach(var elementas in klausimas.PossibleAnswers)
+                if (string.Compare(klausimas.Id, possibleAnswer.QuestionId) == 0)
                 {
-                    if(string.Compare(elementas, possibleAnswer.Text) == 0)
+                    foreach (var elementas in klausimas.PossibleAnswers)
                     {
-                        exists = true;
-                        break;
+                        i++;
+                        if (string.Compare(elementas, possibleAnswer.Text) == 0)
+                        {
+                            exists = true;
+                            break;
+                        }
                     }
                 }
             }
-            if(exists)
+            if (!exists)
             {
-                return "Possible answers already exists";
+                return null;
             }
             int questionId = int.Parse(possibleAnswer.QuestionId);
-            topic.Questions[questionId].PossibleAnswers.Add(possibleAnswer.Text);
-
-
-            return "possible answer added";
+            topic.Questions[questionId].PossibleAnswers.RemoveAt(i);
+            _topics.ReplaceOne(t => t.Id == topic.Id, topic);
+            return topic;
         }
+
+        //public string Bandymas(PossibleAnswer possibleAnswer)
+        //{
+        //    Topic topic = GetTopic(possibleAnswer.TopicId);
+        //    bool exists = false;
+        //    foreach (var klausimas in topic.Questions)
+        //    {
+        //        foreach (var elementas in klausimas.PossibleAnswers)
+        //        {
+        //            if (string.Compare(elementas, possibleAnswer.Text) == 0)
+        //            {
+        //                exists = true;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    if (exists)
+        //    {
+        //        return "Possible answers already exists";
+        //    }
+        //    int questionId = int.Parse(possibleAnswer.QuestionId);
+        //    topic.Questions[questionId].PossibleAnswers.Add(possibleAnswer.Text);
+
+        //    return "possible answer added";
+        //}
     }
 }

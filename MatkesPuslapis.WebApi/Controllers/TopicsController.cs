@@ -135,29 +135,30 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        [HttpPatch("bandymas")]
-        public IActionResult Bandymas(PossibleAnswer possibleAnswer)
+        [HttpPatch("question/removePossibleAnswerByText")]
+        public IActionResult removePossibleAnswerByText(PossibleAnswer possibleAnswer)
         {
             try
             {
-                return Ok(_topicServices.Bandymas(possibleAnswer));
+                return Ok(_topicServices.RemovePossibleAnswerByText(possibleAnswer));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(404, new { Result = "Not found" });
             }
         }
 
-        //[HttpPatch("question/addPossibleAnswer")]
-        //public IActionResult Bandymas2(TopicQuestionDelete topicQuestionDelete)
+        //[HttpPatch("bandymas")]
+        //public IActionResult Bandymas(PossibleAnswer possibleAnswer)
         //{
-        //    return Ok();
-        //}
-
-        //[HttpPatch("question/removePossibleAnswer")]
-        //public IActionResult Bandymas3(TopicQuestionDelete topicQuestionDelete)
-        //{
-        //    return Ok();
+        //    try
+        //    {
+        //        return Ok(_topicServices.Bandymas(possibleAnswer));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(404, new { Result = "Not found" });
+        //    }
         //}
     }
 }

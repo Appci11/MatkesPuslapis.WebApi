@@ -20,6 +20,7 @@ namespace MatkesPuslapis.Core.Interfaces
         Topic AddQuestion(TopicQuestion topicQuestion);
         Topic RemoveQuestion(TopicQuestionDelete topicQuestionDelete);
         Topic AddPossibleAnswerByText(PossibleAnswer possibleAnswer);
-        string Bandymas(PossibleAnswer possibleAnswer);
+        Topic RemovePossibleAnswerByText(PossibleAnswer possibleAnswer);
+        //string Bandymas(PossibleAnswer possibleAnswer);
     }
 }
