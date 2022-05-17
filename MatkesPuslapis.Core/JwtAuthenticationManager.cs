@@ -26,9 +26,11 @@ namespace MatkesPuslapis.Core
         }
         public string Authenticate(string email, string password)
         {
+            User user;
+
             try
             {
-                _users.Find(user => user.EMail == email && user.Password == password).First();
+                user = _users.Find(user => user.EMail == email && user.Password == password).First();
             }
             catch (Exception ex)
             {
@@ -41,9 +43,9 @@ namespace MatkesPuslapis.Core
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, email)
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
                 }),
-                Expires = DateTime.UtcNow.AddSeconds(20),
+                Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials =
                 new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
@@ -51,6 +53,16 @@ namespace MatkesPuslapis.Core
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public User GetUser(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenKey = Encoding.ASCII.GetBytes(key);
+            var idk = tokenHandler.ReadJwtToken(token.Split(' ')[1]);
+            var wtf = idk.Claims.First().Value;
+            User user = _users.Find(user => user.Id == wtf).First();
+            return user;
         }
 
         public User AddUser(string username, string email, string password)

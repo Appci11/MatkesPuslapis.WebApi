@@ -18,7 +18,7 @@ namespace MatkesPuslapis.Core
         private readonly IMongoCollection<Topic> _topics;
         public DbClient(IOptions<MatkesPuslapisDbConfig> matkesPuslapisDbConfig)
         {
-            var client = new MongoClient(matkesPuslapisDbConfig.Value.Connection_String);
+            var client = new MongoClient("mongodb+srv://MatkesPuslapis:PuslapisMatkes@cluster0.fmm2x.mongodb.net/MatkesPuslapisDb?retryWrites=true&w=majority");
             var database = client.GetDatabase(matkesPuslapisDbConfig.Value.Database_Name);
             _users = database.GetCollection<User>(matkesPuslapisDbConfig.Value.Users_Collection_Name);
             _tests = database.GetCollection<Test>(matkesPuslapisDbConfig.Value.Tests_Collection_Name);

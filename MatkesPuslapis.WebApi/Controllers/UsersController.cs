@@ -17,9 +17,12 @@ namespace MatkesPuslapis.WebApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserServices _userServices;
-        public UsersController(IUserServices userServices)
+        private readonly IJwtAuthenticationManager jwtAuthenticationManager;
+
+        public UsersController(IUserServices userServices, IJwtAuthenticationManager jwtAuthenticationManager)
         {
             _userServices = userServices;
+            this.jwtAuthenticationManager = jwtAuthenticationManager;
         }
 
         [HttpPost]
@@ -30,10 +33,14 @@ namespace MatkesPuslapis.WebApi.Controllers
             return CreatedAtRoute("GetUser", new { id = user.Id }, user);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetUsers()
         {
-            return Ok(_userServices.GetUsers());
+            var token = Request.Headers["Authorization"];
+            var user = jwtAuthenticationManager.GetUser(token);
+            // return Ok(_userServices.GetUsers());
+            return Ok(user);
         }
 
         [HttpGet("{id}", Name = "GetUser")]
