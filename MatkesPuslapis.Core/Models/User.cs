@@ -16,6 +16,7 @@ namespace MatkesPuslapis.Core
         public string Id { get; set; }
         public string Username { get; set; }
         public string EMail { get; set; }
+        public bool IsAdmin { get; set; } = false;
 
         [JsonIgnore]
         public string Password { get; set; }

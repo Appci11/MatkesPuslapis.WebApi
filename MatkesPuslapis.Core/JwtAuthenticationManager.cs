@@ -71,6 +71,7 @@ namespace MatkesPuslapis.Core
             user.Username = username;
             user.EMail = email;
             user.Password = password;
+            user.IsAdmin = false;
             _users.InsertOne(user);
             return user;
         }
