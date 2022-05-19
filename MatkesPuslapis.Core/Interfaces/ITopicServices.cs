@@ -13,15 +13,15 @@ namespace MatkesPuslapis.Core.Interfaces
         //Topic AddTopic(TopicCreation topicCreation);
         Topic AddTopic(Topic topic);
         Topic GetTopic(string id);
-        Topic GetTopicByIndex(int index);
+        //Topic GetTopicByIndex(int index);
         void DeleteTopic(string id);
         Topic UpdateTopic(TopicEdit topicEdit);
         bool TopicExists(string title);
-        bool IndexExists(int index);
-        Topic AddQuestion(TopicQuestion topicQuestion);
-        Topic RemoveQuestion(TopicQuestionDelete topicQuestionDelete);
-        Topic AddPossibleAnswerByText(PossibleAnswer possibleAnswer);
-        Topic RemovePossibleAnswerByText(PossibleAnswer possibleAnswer);
+        //bool IndexExists(int index);
+        //Topic AddQuestion(TopicQuestion topicQuestion);
+        //Topic RemoveQuestion(TopicQuestionDelete topicQuestionDelete);
+        //Topic AddPossibleAnswerByText(PossibleAnswer possibleAnswer);
+        //Topic RemovePossibleAnswerByText(PossibleAnswer possibleAnswer);
         //string Bandymas(PossibleAnswer possibleAnswer);
     }
 }

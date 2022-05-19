@@ -18,7 +18,7 @@ namespace MatkesPuslapis.Core.Models
         {
             Title = tc.Title;
             Text = tc.Text;
-            Index = tc.Index;
+            //Index = tc.Index;
             Questions = new List<Question>();
         }
 
@@ -26,7 +26,7 @@ namespace MatkesPuslapis.Core.Models
         {
             Title = te.Title;
             Text = te.Text;
-            Index = te.Index;
+            //Index = te.Index;
         }
 
         //potencialiai trinamas
@@ -34,7 +34,7 @@ namespace MatkesPuslapis.Core.Models
         {
             Title = title;
             Text = text;
-            Index = index;
+            //Index = index;
             Questions = new List<Question>();
         }
 
@@ -43,7 +43,7 @@ namespace MatkesPuslapis.Core.Models
         public string Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public int Index {get; set;}
+        //public int Index {get; set;}
         public List<Question> Questions { get; set; }
 }
 }

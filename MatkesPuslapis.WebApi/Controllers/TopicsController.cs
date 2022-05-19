@@ -23,8 +23,8 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             if (_topicServices.TopicExists(topic.Title))
                 return StatusCode(406, new { Title = "Already exists" });
-            if (_topicServices.IndexExists(topic.Index))
-                return StatusCode(406, new { Index = "Already exists" });
+            //if (_topicServices.IndexExists(topic.Index))
+            //    return StatusCode(406, new { Index = "Already exists" });
             _topicServices.AddTopic(topic);
             return Ok(topic);
             //return CreatedAtRoute("GetTopic", new { id = topic.Id }, topic);
@@ -49,18 +49,18 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        [HttpGet("index/{index}", Name = "GetStoryByName")]
-        public IActionResult GetStoryByName(int index)
-        {
-            try
-            {
-                return Ok(_topicServices.GetTopicByIndex(index));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpGet("index/{index}", Name = "GetStoryByName")]
+        //public IActionResult GetStoryByName(int index)
+        //{
+        //    try
+        //    {
+        //        return Ok(_topicServices.GetTopicByIndex(index));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         //100% egzistuoja bugai, bet nzn ar butina rodyt
         //tarkim nurodau pakeist tik Title, bet index lieka, tokiu atveju sauks,
@@ -70,8 +70,8 @@ namespace MatkesPuslapis.WebApi.Controllers
         {
             if (_topicServices.TopicExists(topic.Title))
                 return StatusCode(406, new { Title = "Already exists" });
-            if (_topicServices.IndexExists(topic.Index))
-                return StatusCode(406, new { Index = "Already exists" });
+            //if (_topicServices.IndexExists(topic.Index))
+            //    return StatusCode(406, new { Index = "Already exists" });
             try
             {
                 return Ok(_topicServices.UpdateTopic(topic));
@@ -96,58 +96,58 @@ namespace MatkesPuslapis.WebApi.Controllers
             }
         }
 
-        //patikrinimo reikia, ar Question tokiu id jau neegzistuoja
-        [HttpPatch("addQuestion")]
-        public IActionResult AddSolvedTopic(TopicQuestion topicQuestion)
-        {
-            try
-            {
-                return Ok(_topicServices.AddQuestion(topicQuestion));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        ////patikrinimo reikia, ar Question tokiu id jau neegzistuoja
+        //[HttpPatch("addQuestion")]
+        //public IActionResult AddSolvedTopic(TopicQuestion topicQuestion)
+        //{
+        //    try
+        //    {
+        //        return Ok(_topicServices.AddQuestion(topicQuestion));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
-        [HttpPatch("removeQuestion")]
-        public IActionResult RemoveQuestion(TopicQuestionDelete topicQuestionDelete)
-        {
-            try
-            {
-                return Ok(_topicServices.RemoveQuestion(topicQuestionDelete));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpPatch("removeQuestion")]
+        //public IActionResult RemoveQuestion(TopicQuestionDelete topicQuestionDelete)
+        //{
+        //    try
+        //    {
+        //        return Ok(_topicServices.RemoveQuestion(topicQuestionDelete));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
-        [HttpPatch("question/addPossibleAnswerByText")]
-        public IActionResult AddPossibleAnswerByText(PossibleAnswer possibleAnswer)
-        {
-            try
-            {
-                return Ok(_topicServices.AddPossibleAnswerByText(possibleAnswer));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpPatch("question/addPossibleAnswerByText")]
+        //public IActionResult AddPossibleAnswerByText(PossibleAnswer possibleAnswer)
+        //{
+        //    try
+        //    {
+        //        return Ok(_topicServices.AddPossibleAnswerByText(possibleAnswer));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
-        [HttpPatch("question/removePossibleAnswerByText")]
-        public IActionResult removePossibleAnswerByText(PossibleAnswer possibleAnswer)
-        {
-            try
-            {
-                return Ok(_topicServices.RemovePossibleAnswerByText(possibleAnswer));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(404, new { Result = "Not found" });
-            }
-        }
+        //[HttpPatch("question/removePossibleAnswerByText")]
+        //public IActionResult removePossibleAnswerByText(PossibleAnswer possibleAnswer)
+        //{
+        //    try
+        //    {
+        //        return Ok(_topicServices.RemovePossibleAnswerByText(possibleAnswer));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(404, new { Result = "Not found" });
+        //    }
+        //}
 
         //[HttpPatch("bandymas")]
         //public IActionResult Bandymas(PossibleAnswer possibleAnswer)
