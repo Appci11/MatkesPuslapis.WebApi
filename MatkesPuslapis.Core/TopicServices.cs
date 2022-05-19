@@ -30,12 +30,9 @@ namespace MatkesPuslapis.Core
 
         //public Topic GetTopicByIndex(int index) => _topics.Find(topic => topic.Index == index).First();
 
-        public Topic UpdateTopic(TopicEdit topicEdit)
+        public Topic UpdateTopic(Topic topic)
         {
-            Topic topic = GetTopic(topicEdit.Id);
-            topic.Title = topicEdit.Title;
-            topic.Text = topicEdit.Text;
-            //topic.Index = topicEdit.Index;
+            GetTopic(topic.Id);
             _topics.ReplaceOne(t => t.Id == topic.Id, topic);
             return topic;
         }

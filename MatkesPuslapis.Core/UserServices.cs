@@ -30,7 +30,6 @@ namespace MatkesPuslapis.Core
         {
             GetUser(user.Id);
             _users.ReplaceOne(u => u.Id == user.Id, user);
-
             return user;
         }
 

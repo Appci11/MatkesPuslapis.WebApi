@@ -66,7 +66,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         //tarkim nurodau pakeist tik Title, bet index lieka, tokiu atveju sauks,
         //kad irasas su tokiu Index jau egzistuoja
         [HttpPut]
-        public IActionResult UpdateTopic(TopicEdit topic)
+        public IActionResult UpdateTopic(Topic topic)
         {
             if (_topicServices.TopicExists(topic.Title))
                 return StatusCode(406, new { Title = "Already exists" });
