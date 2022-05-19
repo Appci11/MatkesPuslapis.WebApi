@@ -10,7 +10,8 @@ namespace MatkesPuslapis.Core.Interfaces
     public interface ITopicServices
     {
         List<Topic> GetTopics();
-        Topic AddTopic(TopicCreation topicCreation);
+        //Topic AddTopic(TopicCreation topicCreation);
+        Topic AddTopic(Topic topic);
         Topic GetTopic(string id);
         Topic GetTopicByIndex(int index);
         void DeleteTopic(string id);

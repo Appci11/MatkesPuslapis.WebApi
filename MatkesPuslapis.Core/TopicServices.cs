@@ -17,9 +17,9 @@ namespace MatkesPuslapis.Core
             _topics = dbClient.GetTopicsCollection();
         }
 
-        public Topic AddTopic(TopicCreation topicCreation)
+        public Topic AddTopic(Topic topic)
         {
-            Topic topic = new Topic(topicCreation);
+            //Topic topic = new Topic(topicCreation);   //nebereikia, topic turetu tiesiai keliaut be pakeitumu
             _topics.InsertOne(topic);
             return topic;
         }
@@ -80,9 +80,16 @@ namespace MatkesPuslapis.Core
             string qId = "";        //question ID
             foreach (var element in topic.Questions)
             {
-                int sk = Int32.Parse(element.Id);
-                if (sk > max)
-                    max = sk;
+                try
+                {
+                    int sk = Int32.Parse(element.Id);
+                    if (sk >= max)
+                        max = sk;
+                }
+                catch(Exception ex)
+                {
+                    max = topic.Questions.Count;
+                }
             }
 
             if (topic.Questions.Count > 0)
@@ -90,7 +97,7 @@ namespace MatkesPuslapis.Core
                 max++;
             }
             qId = max.ToString();
-            Question question = new Question(topicQuestion.TopicId, qId, topicQuestion.QuestionText, topicQuestion.CorrectAnswer);
+            Question question = new Question(topicQuestion.TopicId, qId, topicQuestion.CorrectAnswer, topicQuestion.QuestionText, topicQuestion.Hint);
             topic.Questions.Add(question);
             _topics.ReplaceOne(t => t.Id == topic.Id, topic);
 

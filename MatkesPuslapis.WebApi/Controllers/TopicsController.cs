@@ -1,4 +1,5 @@
-﻿using MatkesPuslapis.Core.Interfaces;
+﻿using MatkesPuslapis.Core;
+using MatkesPuslapis.Core.Interfaces;
 using MatkesPuslapis.Core.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTopic(TopicCreation topic)
+        public IActionResult AddTopic(Topic topic)
         {
             if (_topicServices.TopicExists(topic.Title))
                 return StatusCode(406, new { Title = "Already exists" });

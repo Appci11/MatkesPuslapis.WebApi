@@ -11,5 +11,6 @@ namespace MatkesPuslapis.Core.Models
         public string TopicId { get; set; }
         public string QuestionText { get; set; }
         public string CorrectAnswer { get; set; }
+        public string Hint { get; set; }
     }
 }
