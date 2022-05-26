@@ -16,7 +16,9 @@ namespace MatkesPuslapis.Core.Interfaces
         //Topic GetTopicByIndex(int index);
         void DeleteTopic(string id);
         Topic UpdateTopic(Topic topic);
+        bool TopicExists(string title, string id);
         bool TopicExists(string title);
+        
         //bool IndexExists(int index);
         //Topic AddQuestion(TopicQuestion topicQuestion);
         //Topic RemoveQuestion(TopicQuestionDelete topicQuestionDelete);

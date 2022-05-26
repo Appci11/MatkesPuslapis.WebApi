@@ -56,6 +56,22 @@ namespace MatkesPuslapis.Core
             return exists;
         }
 
+        public bool TopicExists(string title, string id)
+        {
+            bool exists = true;
+            try
+            {
+                _topics.Find(topic => topic.Title == title && topic.Id != id).First();
+            }
+            catch (Exception ex)
+            {
+                exists = false;
+            }
+            return exists;
+        }
+
+
+
         //public bool IndexExists(int index)
         //{
         //    bool exists = true;

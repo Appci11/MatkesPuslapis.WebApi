@@ -68,7 +68,7 @@ namespace MatkesPuslapis.WebApi.Controllers
         [HttpPut]
         public IActionResult UpdateTopic(Topic topic)
         {
-            if (_topicServices.TopicExists(topic.Title))
+            if (_topicServices.TopicExists(topic.Title, topic.Id))
                 return StatusCode(406, new { Title = "Already exists" });
             //if (_topicServices.IndexExists(topic.Index))
             //    return StatusCode(406, new { Index = "Already exists" });
